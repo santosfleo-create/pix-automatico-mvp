@@ -10,8 +10,12 @@ import "./index.css";
 function TopBar() {
   return (
     <div className="topbar">
-      <div className="topbar-inner">
-        <span style={{ fontSize: 22 }}>💠</span>
+      <div className="topbar-inner" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+        <img
+          src="/pix.png"
+          alt="Pix Automático Logo"
+          style={{ width: "28px", height: "28px" }}
+        />
         <Link
           to="/"
           style={{
