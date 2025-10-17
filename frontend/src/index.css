@@ -29,10 +29,6 @@ body { background: #f7f8fa; font-family: -apple-system, BlinkMacSystemFont, 'Seg
   height:34px;
   transition:background 0.2s ease;
 }
-
-.btn:hover {
-  background:#2e9b85;    /* tom mais escuro no hover */
-}
 .btn:disabled { opacity:.6; cursor:not-allowed; }
 .btn-link { background:#2563eb; color:#fff; border-radius:6px; text-decoration:none; padding:6px 14px; display:inline-block; font-size:13px; height:34px; line-height:22px; text-align:center; }
 .input, .select { padding:8px; border-radius:6px; border:1px solid #ccc; }
