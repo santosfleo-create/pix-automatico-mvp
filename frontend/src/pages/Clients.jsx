@@ -31,15 +31,14 @@ export default function Clients() {
   }
 
   useEffect(() => {
-    refresh();
-  }, []);
+  // Desativa o scroll quando esta página está aberta
+  document.body.style.overflowY = "hidden";
 
-  async function addClient() {
-    if (!name.trim()) return alert("Informe o nome do cliente.");
-    await createClient(name.trim());
-    setName("");
-    refresh();
-  }
+  // Reativa o scroll quando sai da página
+  return () => {
+    document.body.style.overflowY = "auto";
+  };
+}, []);
 
   return (
     <div className="spacer-top" style={{ minHeight: "calc(100vh - 160px)" }}>
