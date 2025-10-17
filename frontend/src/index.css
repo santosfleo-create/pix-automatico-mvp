@@ -33,7 +33,25 @@ body { background: #f7f8fa; font-family: -apple-system, BlinkMacSystemFont, 'Seg
   transition:background 0.2s ease;
 }
 .btn:disabled { opacity:.6; cursor:not-allowed; }
-.btn-link { background:#2563eb; color:#fff; border-radius:6px; text-decoration:none; padding:6px 14px; display:inline-block; font-size:13px; height:34px; line-height:22px; text-align:center; }
+.btn-link {
+  background:#38b49c;          /* 💚 mesmo verde da marca */
+  color:#fff;
+  border:none;
+  border-radius:6px;
+  text-decoration:none;
+  padding:6px 14px;
+  display:inline-block;
+  font-size:13px;
+  height:34px;
+  line-height:22px;
+  text-align:center;
+  cursor:pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-link:hover {
+  background:#2e9b85;          /* escurece levemente no hover */
+}
 .input, .select { padding:8px; border-radius:6px; border:1px solid #ccc; }
 .grid-cards { display:flex; gap:20px; justify-content:space-between; }
 .badge { padding:4px 8px; border-radius:8px; font-weight:500; font-size:13px; display:inline-block; }
