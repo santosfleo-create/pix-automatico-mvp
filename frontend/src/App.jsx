@@ -6,6 +6,7 @@ import ClientDetails from "./pages/ClientDetails.jsx";
 import Landing from "./pages/Landing.jsx";
 import "./index.css";
 
+// 🔹 Cabeçalho superior
 function TopBar() {
   return (
     <div className="topbar">
@@ -27,7 +28,7 @@ function TopBar() {
   );
 }
 
-// 🔹 Banner informativo no topo
+// 🔹 Banner informativo (abaixo do topo)
 function MvpBanner() {
   return (
     <div
@@ -46,6 +47,27 @@ function MvpBanner() {
   );
 }
 
+// 🔹 Rodapé (visível em todas as páginas)
+function Footer() {
+  return (
+    <footer
+      style={{
+        backgroundColor: "#ecfdf5",
+        color: "#065f46",
+        textAlign: "center",
+        padding: "14px 0",
+        fontSize: 14,
+        fontWeight: 500,
+        borderTop: "1px solid #d1fae5",
+        marginTop: "40px",
+      }}
+    >
+      💚 <strong>Pix Automático</strong> — Projeto Beta Validando Ideia • Feito no Brasil 🇧🇷
+    </footer>
+  );
+}
+
+// 🔹 App principal
 function App() {
   return (
     <BrowserRouter>
@@ -53,12 +75,15 @@ function App() {
       <MvpBanner />
       <div className="app-container">
         <Routes>
-          {/* 👉 Agora a Landing é a página inicial */}
+          {/* Landing page inicial */}
           <Route path="/" element={<Landing />} />
+          {/* Tabela de clientes */}
           <Route path="/clients" element={<Clients />} />
+          {/* Detalhes do cliente */}
           <Route path="/clients/:id" element={<ClientDetails />} />
         </Routes>
       </div>
+      <Footer /> {/* 👈 aparece em todas as páginas */}
     </BrowserRouter>
   );
 }
