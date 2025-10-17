@@ -1,6 +1,6 @@
 
 html, body, #root {
-  height: auto;           /* deixa a altura natural */
+  height: 95%;           /* deixa a altura natural */
   min-height: 95%;      /* garante o preenchimento da tela */
   margin: 0;
   overflow-y: auto;       /* só mostra scroll se realmente precisar */
