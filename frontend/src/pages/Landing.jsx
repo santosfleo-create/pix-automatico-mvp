@@ -64,23 +64,23 @@ export default function Landing() {
 
         {/* 🚀 Botão principal */}
         <a
-          href="/"
-          style={{
-            display: "inline-block",
-            background: "#38b49c",
-            color: "#fff",
-            padding: "12px 28px",
-            borderRadius: 12,
-            textDecoration: "none",
-            fontSize: 18,
-            fontWeight: 600,
-            marginTop: "20px",
-            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-          }}
-        >
-          🚀 Acessar MVP
-        </a>
-
+  href="/clients"
+  style={{
+    display: "inline-block",
+    background: "#38b49c",
+    color: "#fff",
+    padding: "12px 28px",
+    borderRadius: 12,
+    textDecoration: "none",
+    fontSize: 18,
+    fontWeight: 600,
+    marginTop: "20px",
+    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    transition: "all 0.2s ease-in-out",
+  }}
+>
+  🚀 Acessar MVP
+</a>
         {/* ⚠️ Aviso Beta */}
         <div
           style={{
