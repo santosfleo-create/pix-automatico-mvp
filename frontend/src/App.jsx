@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Clients from "./pages/Clients.jsx";
 import ClientDetails from "./pages/ClientDetails.jsx";
+import Landing from "./pages/Landing.jsx";
 import "./index.css";
 
 function TopBar() {
@@ -26,13 +27,13 @@ function TopBar() {
   );
 }
 
-// 🔹 Novo componente do banner MVP
+// 🔹 Banner informativo no topo
 function MvpBanner() {
   return (
     <div
       style={{
-        background: "#fef9c3", // amarelo claro
-        color: "#92400e", // marrom suave
+        background: "#fef9c3",
+        color: "#92400e",
         textAlign: "center",
         padding: "8px 12px",
         fontSize: "14px",
@@ -49,31 +50,17 @@ function App() {
   return (
     <BrowserRouter>
       <TopBar />
-      <MvpBanner /> {/* 👈 Banner aqui, logo abaixo do topo */}
+      <MvpBanner />
       <div className="app-container">
         <Routes>
-          <Route path="/" element={<Clients />} />
+          {/* 👉 Agora a Landing é a página inicial */}
+          <Route path="/" element={<Landing />} />
+          <Route path="/clients" element={<Clients />} />
           <Route path="/clients/:id" element={<ClientDetails />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
-}
-
-// --- Deletar cliente ---
-export async function deleteClient(clientId) {
-  const res = await fetch(`${API_BASE}/api/clients/${clientId}`, {
-    method: "DELETE",
-  });
-  return res.json();
-}
-
-// --- Deletar autorização ---
-export async function deleteAuthorization(authId) {
-  const res = await fetch(`${API_BASE}/api/authorizations/${authId}`, {
-    method: "DELETE",
-  });
-  return res.json();
 }
 
 createRoot(document.getElementById("root")).render(<App />);
