@@ -1,0 +1,172 @@
+// frontend/src/pages/Landing.jsx
+import React from "react";
+
+export default function Landing() {
+  return (
+    <main
+      style={{
+        backgroundColor: "#e7f5f0", // fundo verde-claro igual ao Google Forms
+        color: "#111827",
+        minHeight: "100vh",
+        fontFamily:
+          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif",
+      }}
+    >
+      {/* 🔹 Header com imagem da marca (igual ao Google Forms) */}
+      <div
+        style={{
+          width: "100%",
+          backgroundColor: "#e7f5f0",
+          display: "flex",
+          justifyContent: "center",
+          padding: "32px 0 20px 0",
+        }}
+      >
+        <img
+  src="/pix-automatico-header.png"
+  alt="Pix Automático — Automatize suas cobranças. Poupe tempo."
+  style={{
+    maxWidth: "480px", // antes era 700px
+    width: "80%",      // ajusta bem para mobile
+    height: "auto",
+    borderRadius: "12px", // opcional, dá um toque suave
+    boxShadow: "0 2px 6px rgba(0,0,0,0.08)", // opcional, leve destaque
+  }}
+/>
+      </div>
+
+      {/* 🔸 Título principal */}
+      <section style={{ textAlign: "center", padding: "20px 16px 10px 16px" }}>
+        <h2
+          style={{
+            color: "#15803d",
+            fontSize: "28px",
+            marginBottom: "8px",
+            fontWeight: 700,
+          }}
+        >
+          Pix Automático — Beta Público
+        </h2>
+        <p style={{ fontSize: "18px", color: "#374151", maxWidth: "600px", margin: "0 auto" }}>
+          Automação de cobranças via Pix, simples e inteligente.
+        </p>
+        <p
+          style={{
+            color: "#4b5563",
+            fontSize: "16px",
+            marginTop: "12px",
+            lineHeight: "1.6",
+          }}
+        >
+          Teste gratuitamente o sistema que permite gerenciar clientes, gerar cobranças recorrentes e automatizar
+          reembolsos — tudo 100% via Pix.
+        </p>
+
+        {/* 🚀 Botão principal */}
+        <a
+          href="/"
+          style={{
+            display: "inline-block",
+            background: "#38b49c",
+            color: "#fff",
+            padding: "12px 28px",
+            borderRadius: 12,
+            textDecoration: "none",
+            fontSize: 18,
+            fontWeight: 600,
+            marginTop: "20px",
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+          }}
+        >
+          🚀 Acessar MVP
+        </a>
+
+        {/* ⚠️ Aviso Beta */}
+        <div
+          style={{
+            marginTop: "16px",
+            background: "#fff8e1",
+            border: "1px solid #fcd34d",
+            borderRadius: "8px",
+            padding: "10px 16px",
+            maxWidth: "480px",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <p
+            style={{
+              color: "#92400e",
+              fontSize: "14px",
+              margin: 0,
+              textAlign: "center",
+              lineHeight: "1.5",
+            }}
+          >
+            ⚠️ Esta é uma versão <b>beta</b> para validação da ideia.
+            <br />
+            Algumas funções (como o débito automático futuro) ainda estão em desenvolvimento.
+          </p>
+        </div>
+      </section>
+
+      {/* 💬 Seção de feedback */}
+      <section
+        style={{
+          background: "#ffffff",
+          marginTop: "40px",
+          padding: "40px 16px",
+          borderTop: "2px solid #d1fae5",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: "20px" }}>
+          <h3 style={{ color: "#15803d", fontSize: "22px", fontWeight: 600 }}>
+            💬 Envie seu feedback
+          </h3>
+          <p style={{ color: "#4b5563", maxWidth: "600px", margin: "8px auto", fontSize: "15px" }}>
+            Sua opinião é essencial para melhorarmos o Pix Automático.
+            <br />
+            O formulário abaixo leva menos de 2 minutos:
+          </p>
+        </div>
+
+        {/* 📋 Formulário Google (embed completo) */}
+        <div
+          style={{
+            maxWidth: "700px",
+            margin: "0 auto",
+            borderRadius: "12px",
+            overflow: "hidden",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+          }}
+        >
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSekXHxfQmo1Xlk3F5RR3tKncUitDLSlRr7jGOckP14uFjaOxw/viewform?embedded=true"
+            width="100%"
+            height="1200"
+            frameBorder="0"
+            marginHeight="0"
+            marginWidth="0"
+            title="Feedback Pix Automático"
+          >
+            Carregando formulário…
+          </iframe>
+        </div>
+      </section>
+
+      {/* ⚙️ Rodapé */}
+      <footer
+        style={{
+          textAlign: "center",
+          padding: "20px 0",
+          fontSize: "14px",
+          color: "#6b7280",
+          backgroundColor: "#f0fdf4",
+          marginTop: "40px",
+        }}
+      >
+        💚 Pix Automático — Projeto Beta Validando Ideia • Feito no Brasil 🇧🇷
+      </footer>
+    </main>
+  );
+}
