@@ -53,7 +53,24 @@ export default function Clients() {
             onKeyDown={(e) => e.key === "Enter" && addClient()}
             style={{ minWidth: 220 }}
           />
-          <button className="btn" onClick={addClient}>Adicionar</button>
+          <button
+  style={{
+    backgroundColor: "#38b49c", // verde igual ao da landing
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    padding: "8px 16px",
+    fontWeight: 600,
+    cursor: "pointer",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    transition: "background 0.2s",
+  }}
+  onClick={handleAddClient}
+  onMouseEnter={(e) => (e.target.style.backgroundColor = "#2e9b85")}
+  onMouseLeave={(e) => (e.target.style.backgroundColor = "#38b49c")}
+>
+  Adicionar
+</button>
         </div>
 
         {clients.length === 0 ? (
