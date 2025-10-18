@@ -37,16 +37,16 @@ function MvpBanner() {
   return (
     <div
       style={{
-        background: "#fef9c3",
-        color: "#92400e",
+        backgroundColor: "#fff7cc", // amarelo mais suave
+        color: "#6b5000",            // marrom mais elegante
         textAlign: "center",
         padding: "8px 12px",
         fontSize: "14px",
         fontWeight: 500,
-        borderBottom: "1px solid #fcd34d",
+        borderBottom: "1px solid #f2e8a0", // borda sutil
       }}
     >
-      ⚡ Versão pública de demonstração — o sistema está em fase de testes e alguns dados podem ser reiniciados.
+      ⚡ Versão pública de demonstração — O sistema está em fase de testes e alguns dados podem ser reiniciados.
     </div>
   );
 }
