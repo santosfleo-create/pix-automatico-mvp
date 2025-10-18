@@ -118,14 +118,16 @@ export default function Landing() {
       </section>
 
       {/* 💬 Seção de feedback */}
-      <section
-        style={{
-          background: "#ffffff",
-          marginTop: "40px",
-          padding: "40px 16px",
-          borderTop: "2px solid #d1fae5",
-        }}
-      >
+<section
+  id="feedback"
+  style={{
+    background: "#ffffff",
+    marginTop: "40px",
+    padding: "40px 16px",
+    borderTop: "2px solid #d1fae5",
+    scrollMarginTop: "100px", // evita que o cabeçalho esconda o topo
+  }}
+>
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <h3 style={{ color: "#15803d", fontSize: "22px", fontWeight: 600 }}>
             💬 Envie seu feedback
