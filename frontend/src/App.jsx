@@ -88,30 +88,71 @@ function App() {
         </Routes>
 </div>
 
-{/* 🔹 Botão flutuante de feedback */}
-<a
-  href="/#feedback"
-  style={{
-    position: "fixed",
-    bottom: "24px",
-    right: "24px",
-    background: "linear-gradient(135deg, #38b49c, #2d937f)",
-    color: "#fff",
-    padding: "12px 20px",
-    borderRadius: "30px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    fontWeight: "500",
-    fontSize: "14px",
-    textDecoration: "none",
-    zIndex: 1000,
-    transition: "all 0.2s ease",
-  }}
-  onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
-  onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1.0)")}
->
-  💬 Feedback
-</a>
+import { useNavigate, useLocation } from "react-router-dom";
 
-<Footer /> {/* 👈 aparece em todas as páginas */} </BrowserRouter> ); }
+// ...
+
+function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function handleFeedbackClick(e) {
+    e.preventDefault();
+
+    if (location.pathname === "/") {
+      // Já está na landing → apenas rola até o feedback
+      const feedback = document.getElementById("feedback");
+      if (feedback) feedback.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Está em outra página → vai para a landing e depois rola
+      navigate("/#feedback");
+      setTimeout(() => {
+        const feedback = document.getElementById("feedback");
+        if (feedback) feedback.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+  }
+
+  return (
+    <BrowserRouter>
+      <TopBar />
+      <MvpBanner />
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/clients/:id" element={<ClientDetails />} />
+        </Routes>
+      </div>
+
+      {/* 🔹 Botão flutuante de feedback */}
+      <a
+        href="/#feedback"
+        onClick={handleFeedbackClick}
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          right: "24px",
+          background: "linear-gradient(135deg, #38b49c, #2d937f)",
+          color: "#fff",
+          padding: "12px 20px",
+          borderRadius: "30px",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+          fontWeight: "500",
+          fontSize: "14px",
+          textDecoration: "none",
+          zIndex: 1000,
+          transition: "all 0.2s ease",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1.0)")}
+      >
+        💬 Feedback
+      </a>
+
+      <Footer />
+    </BrowserRouter>
+  );
+}
 
 createRoot(document.getElementById("root")).render(<App />);
