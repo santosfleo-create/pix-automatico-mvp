@@ -45,6 +45,8 @@ body { background: #f7f8fa; font-family: -apple-system, BlinkMacSystemFont, 'Seg
   border-radius:6px;
   text-decoration:none;
   padding:6px 14px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   display:inline-block;
   font-size:13px;
   height:34px;
