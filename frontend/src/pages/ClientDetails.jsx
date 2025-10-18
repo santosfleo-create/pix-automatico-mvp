@@ -278,8 +278,8 @@ export default function ClientDetails() {
       : a.status}
   </div>
 
-  {/* 🔸 Mostra o erro abaixo, se existir */}
-{(a.error || a.errorMessage || a.lastError) && (
+  {/* 🔸 Mostra o motivo (reason) abaixo, se existir */}
+{a.reason_code && (
   <div
     style={{
       marginTop: "4px",
@@ -289,8 +289,7 @@ export default function ClientDetails() {
       maxWidth: "240px",
     }}
   >
-    ⚠️ <strong>Erro:</strong>{" "}
-    {a.error || a.errorMessage || a.lastError}
+    ⚠️ <strong>{a.reason_code}:</strong> {a.reason_desc}
   </div>
 )}
 </td>
