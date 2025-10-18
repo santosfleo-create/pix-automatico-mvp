@@ -315,14 +315,16 @@ export default function ClientDetails() {
             "_blank"
           )
         }
-        style={{ minWidth: 100, marginRight: 8 }}
+        style={{ minWidth: 100, marginRight: 8, marginTop: 4,
+      marginBottom: 4 }}
       >
         Fatura
       </button>
       <button
         className="btn"
         onClick={() => triggerRefund(a.id)}
-        style={{ minWidth: 110 }}
+        style={{ minWidth: 110, marginTop: 4,
+      marginBottom: 4 }}
       >
         Reembolsar
       </button>
