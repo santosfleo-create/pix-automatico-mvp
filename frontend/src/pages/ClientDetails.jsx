@@ -282,74 +282,75 @@ export default function ClientDetails() {
       <td>R$ {a.value}</td>
       <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
 
-      {/* 🔹 STATUS + possível mensagem do Bacen */}
+      {/* 🔹 STATUS COLORIDO + mensagem dinâmica do Bacen */}
 <td>
-  {(() => {
-    const err = extractBacenError(a);
+  <div
+    style={{
+      background:
+        a.status === "paid"
+          ? "#d1fae5" // verde claro
+          : a.status === "failed"
+          ? "#fee2e2" // vermelho claro
+          : a.status === "refund_failed"
+          ? "#fee2e2" // vermelho claro
+          : a.status === "reembolsado"
+          ? "#bfdbfe" // azul claro
+          : a.status === "pendente"
+          ? "#fef9c3" // amarelo claro
+          : "#e5e7eb", // cinza
+      color:
+        a.status === "paid"
+          ? "#065f46"
+          : a.status === "failed"
+          ? "#991b1b"
+          : a.status === "refund_failed"
+          ? "#92400e"
+          : a.status === "reembolsado"
+          ? "#1e40af"
+          : a.status === "pendente"
+          ? "#78350f"
+          : "#374151",
+      padding: "4px 8px",
+      borderRadius: "8px",
+      fontWeight: 500,
+      fontSize: "13px",
+      display: "inline-block",
+    }}
+  >
+    {a.status === "paid"
+      ? "Pago"
+      : a.status === "failed"
+      ? "Falhou"
+      : a.status === "refund_failed"
+      ? "Falha no reembolso"
+      : a.status === "reembolsado"
+      ? "Reembolsado"
+      : a.status === "pendente"
+      ? "Pendente"
+      : a.status === "confirmada"
+      ? "Confirmada"
+      : a.status}
+  </div>
 
-    const bg =
-      a.status === "paid" ? "#d1fae5" :
-      a.status === "failed" ? "#fee2e2" :
-      a.status === "refund_failed" ? "#fee2e2" :
-      a.status === "reembolsado" ? "#bfdbfe" :
-      a.status === "pendente" ? "#fef9c3" :
-      "#e5e7eb";
-
-    const fg =
-      a.status === "paid" ? "#065f46" :
-      a.status === "failed" ? "#991b1b" :
-      a.status === "refund_failed" ? "#92400e" :
-      a.status === "reembolsado" ? "#1e40af" :
-      a.status === "pendente" ? "#78350f" :
-      "#374151";
-
-    const label =
-      a.status === "paid" ? "Pago" :
-      a.status === "failed" ? "Falhou" :
-      a.status === "refund_failed" ? "Falha no reembolso" :
-      a.status === "reembolsado" ? "Reembolsado" :
-      a.status === "pendente" ? "Pendente" :
-      a.status === "confirmada" ? "Confirmada" :
-      a.status;
-
-    return (
-      <div>
-        <span
-          className="badge"
-          style={{
-            background: bg,
-            color: fg,
-            padding: "4px 8px",
-            borderRadius: "8px",
-            fontWeight: 500,
-            fontSize: "13px",
-            display: "inline-block",
-          }}
-        >
-          {label}
-        </span>
-
-        {/* Mostra o retorno do Bacen se houver */}
-        {err && (a.status === "failed" || a.status === "refund_failed") && (
-          <div
-            style={{
-              marginTop: 6,
-              fontSize: 12.5,
-              color: "#991b1b",
-              lineHeight: 1.5,
-              background: "rgba(254, 226, 226, 0.35)",
-              borderRadius: 6,
-              padding: "6px 8px",
-              maxWidth: 280,
-            }}
-          >
-            ⚠️ <strong>{err.code || "Erro"}</strong>
-            {err.desc ? `: ${err.desc}` : ""}
-          </div>
-        )}
-      </div>
-    );
-  })()}
+  {/* 🔸 Exibe o erro retornado pelo backend se existir */}
+  {(a.reason_code || a.reason_desc) && (
+    <div
+      style={{
+        marginTop: "6px",
+        fontSize: "12.5px",
+        color: "#991b1b",
+        lineHeight: 1.5,
+        background: "rgba(254, 226, 226, 0.4)",
+        borderRadius: "6px",
+        padding: "6px 8px",
+        maxWidth: "280px",
+      }}
+    >
+      ⚠️{" "}
+      <strong>{a.reason_code}</strong>
+      {a.reason_desc ? `: ${a.reason_desc}` : ""}
+    </div>
+  )}
 </td>
 
       {/* 🔹 AÇÕES */}
