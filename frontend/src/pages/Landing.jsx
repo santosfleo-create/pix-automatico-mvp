@@ -85,7 +85,7 @@ export default function Landing() {
             boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
           }}
         >
-          🚀 Acessar MVP
+          🚀 Acessar o Sistema
         </a>
 
         {/* ⚠️ Aviso Beta */}
