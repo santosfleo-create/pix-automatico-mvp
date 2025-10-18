@@ -246,14 +246,25 @@ export default function ClientDetails() {
                         ) : a.status === "paid" ? (
                           <>
                             <a
-                              className="btn-link"
-                              href={`${import.meta.env.VITE_API_BASE || "http://localhost:4000"}/invoice/${a.id}`}
-                              target="_blank"
-                              rel="noreferrer"
-                              style={{ marginRight: 8 }}
-                            >
-                              Fatura
-                            </a>
+  className="btn-link"
+  href={`${import.meta.env.VITE_API_BASE || "http://localhost:4000"}/invoice/${a.id}`}
+  target="_blank"
+  rel="noreferrer"
+  style={{
+    marginRight: 8,
+    background: "#38b49c",
+    color: "#fff",
+    borderRadius: "6px",
+    padding: "4px 12px",
+    display: "inline-block",
+    textDecoration: "none",
+    fontSize: "13px",
+    lineHeight: "20px",
+    height: "28px",
+  }}
+>
+  Fatura
+</a>
                             <button className="btn" onClick={() => triggerRefund(a.id)}>
                               Reembolsar
                             </button>
