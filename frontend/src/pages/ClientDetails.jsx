@@ -222,86 +222,178 @@ export default function ClientDetails() {
                   </tr>
                 </thead>
                 <tbody>
-                  {authorizations.map((a) => (
-                    <tr key={a.id}>
-                      <td>{a.description}</td>
-                      <td>R$ {a.value}</td>
-                      <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
-                      <td>
-  {a.status === "paid"
-    ? "Pago"
-    : a.status === "pending"
-    ? "Pendente"
-    : a.status === "failed"
-    ? "Falhou"
-    : a.status === "reembolsado"
-    ? "Reembolsado"
-    : a.status}
-</td>
-                      <td>
-                        {a.status === "failed" || a.status === "refund_failed" ? (
-                          <button className="btn" onClick={() => triggerRetry(a.id)} style={{ minWidth: 160 }}>
-                            {a.status === "refund_failed" ? "Tentar reembolso novamente" : "Tentar novamente"}
-                          </button>
-                        ) : a.status === "paid" ? (
-                          <>
-                            <a
-  className="btn-link"
-  href={`${import.meta.env.VITE_API_BASE || "http://localhost:4000"}/invoice/${a.id}`}
-  target="_blank"
-  rel="noreferrer"
-  style={{
-    marginRight: 8,
-    background: "#38b49c",
-    color: "#fff",
-    borderRadius: "6px",
-    padding: "4px 12px",
-    display: "inline-block",
-    textDecoration: "none",
-    fontSize: "13px",
-    lineHeight: "20px",
-    height: "28px",
-  }}
->
-  Fatura
-</a>
-                            <button className="btn" onClick={() => triggerRefund(a.id)}>
-                              Reembolsar
-                            </button>
-                          </>
-                        ) : a.status === "pendente" ? (
-                          <button className="btn" onClick={() => triggerCharge(a.id)}>
-                            Cobrar
-                          </button>
-                        ) : (
-                          "-"
-                        )}
-                      </td>
-                      <td>
-                        <button
-                          onClick={async (e) => {
-                            e.stopPropagation();
-                            if (window.confirm("Tem certeza que deseja deletar esta autorização?")) {
-                              await deleteAuthorization(a.id);
-                              setAuthorizations(authorizations.filter((x) => x.id !== a.id));
-                            }
-                          }}
-                          style={{
-                            background: "#ef4444",
-                            color: "#fff",
-                            border: "none",
-                            borderRadius: "6px",
-                            padding: "6px 12px",
-                            cursor: "pointer",
-                            fontSize: "13px",
-                          }}
-                        >
-                          Deletar
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
+  {authorizations.map((a) => (
+    <tr key={a.id}>
+      <td>{a.description}</td>
+      <td>R$ {a.value}</td>
+      <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
+
+      {/* 🔹 STATUS COLORIDO */}
+      <td>
+        <span
+          className="badge"
+          style={{
+            background:
+              a.status === "paid"
+                ? "#d1fae5" // verde claro
+                : a.status === "failed"
+                ? "#fee2e2" // vermelho claro
+                : a.status === "refund_failed"
+                ? "#fde68a" // amarelo
+                : a.status === "reembolsado"
+                ? "#bfdbfe" // azul claro
+                : a.status === "pendente"
+                ? "#fef9c3" // amarelo muito claro
+                : "#e5e7eb", // cinza padrão
+            color:
+              a.status === "paid"
+                ? "#065f46"
+                : a.status === "failed"
+                ? "#991b1b"
+                : a.status === "refund_failed"
+                ? "#92400e"
+                : a.status === "reembolsado"
+                ? "#1e40af"
+                : a.status === "pendente"
+                ? "#78350f"
+                : "#374151",
+            padding: "4px 8px",
+            borderRadius: "8px",
+            fontWeight: 500,
+            fontSize: "13px",
+            display: "inline-block",
+          }}
+        >
+          {a.status === "paid"
+            ? "Pago"
+            : a.status === "failed"
+            ? "Falhou"
+            : a.status === "refund_failed"
+            ? "Falha no reembolso"
+            : a.status === "reembolsado"
+            ? "Reembolsado"
+            : a.status === "pendente"
+            ? "Pendente"
+            : a.status === "confirmada"
+            ? "Confirmada"
+            : a.status}
+        </span>
+      </td>
+
+      {/* 🔹 AÇÕES */}
+      <td>
+        {a.status === "failed" || a.status === "refund_failed" ? (
+          <button
+            className="btn"
+            onClick={async () => {
+              try {
+                if (a.status === "failed") {
+                  await retryCharge(a.id);
+                } else if (a.status === "refund_failed") {
+                  await refundAuthorization(a.id);
+                }
+                await refresh();
+              } catch (err) {
+                console.error("Erro ao tentar novamente:", err);
+              }
+            }}
+            style={{ minWidth: 160 }}
+          >
+            {a.status === "refund_failed"
+              ? "Tentar reembolso novamente"
+              : "Tentar novamente"}
+          </button>
+        ) : a.status === "paid" ? (
+          <>
+            <a
+              className="btn-link"
+              href={`${
+                import.meta.env.VITE_API_BASE || "http://localhost:4000"
+              }/invoice/${a.id}`}
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                marginRight: 8,
+                background: "#38b49c",
+                color: "#fff",
+                borderRadius: "6px",
+                padding: "4px 12px",
+                display: "inline-block",
+                textDecoration: "none",
+                fontSize: "13px",
+                lineHeight: "20px",
+                height: "28px",
+              }}
+            >
+              Fatura
+            </a>
+            <button
+              className="btn"
+              onClick={() => triggerRefund(a.id)}
+              style={{ minWidth: 110 }}
+            >
+              Reembolsar
+            </button>
+          </>
+        ) : a.status === "reembolsado" ? (
+          <a
+            className="btn-link"
+            href={`${
+              import.meta.env.VITE_API_BASE || "http://localhost:4000"
+            }/credit-note/${a.id}`}
+            target="_blank"
+            rel="noreferrer"
+            style={{
+              background: "#38b49c",
+              color: "#fff",
+              borderRadius: "6px",
+              padding: "4px 12px",
+              display: "inline-block",
+              textDecoration: "none",
+              fontSize: "13px",
+              lineHeight: "20px",
+              height: "28px",
+            }}
+          >
+            Nota de crédito
+          </a>
+        ) : a.status === "pendente" ? (
+          <button className="btn" onClick={() => triggerCharge(a.id)}>
+            Cobrar
+          </button>
+        ) : (
+          "-"
+        )}
+      </td>
+
+      {/* 🔹 DELETAR */}
+      <td>
+        <button
+          onClick={async (e) => {
+            e.stopPropagation();
+            if (
+              window.confirm("Tem certeza que deseja deletar esta autorização?")
+            ) {
+              await deleteAuthorization(a.id);
+              setAuthorizations(authorizations.filter((x) => x.id !== a.id));
+            }
+          }}
+          style={{
+            background: "#ef4444",
+            color: "#fff",
+            border: "none",
+            borderRadius: "6px",
+            padding: "6px 12px",
+            cursor: "pointer",
+            fontSize: "13px",
+          }}
+        >
+          Deletar
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
               </table>
             </div>
           )}
