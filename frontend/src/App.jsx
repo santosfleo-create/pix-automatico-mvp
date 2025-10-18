@@ -86,10 +86,30 @@ function App() {
           {/* Detalhes do cliente */}
           <Route path="/clients/:id" element={<ClientDetails />} />
         </Routes>
-      </div>
-      <Footer /> {/* 👈 aparece em todas as páginas */}
-    </BrowserRouter>
-  );
-}
+</div>
 
-createRoot(document.getElementById("root")).render(<App />);
+{/* 🔹 Botão flutuante de feedback */}
+<a
+  href="/#feedback"
+  style={{
+    position: "fixed",
+    bottom: "24px",
+    right: "24px",
+    background: "linear-gradient(135deg, #38b49c, #2d937f)",
+    color: "#fff",
+    padding: "12px 20px",
+    borderRadius: "30px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    fontWeight: "500",
+    fontSize: "14px",
+    textDecoration: "none",
+    zIndex: 1000,
+    transition: "all 0.2s ease",
+  }}
+  onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.07)")}
+  onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1.0)")}
+>
+  💬 Feedback
+</a>
+
+<Footer /> {/* 👈 aparece em todas as páginas */}
