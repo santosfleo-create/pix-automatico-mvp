@@ -279,19 +279,20 @@ export default function ClientDetails() {
   </div>
 
   {/* 🔸 Mostra o erro abaixo, se existir */}
-  {a.error && (
-    <div
-      style={{
-        marginTop: "4px",
-        fontSize: "12px",
-        color: "#991b1b",
-        lineHeight: "1.4",
-        maxWidth: "220px",
-      }}
-    >
-      ⚠️ <strong>Erro:</strong> {a.error}
-    </div>
-  )}
+{(a.error || a.errorMessage || a.lastError) && (
+  <div
+    style={{
+      marginTop: "4px",
+      fontSize: "12px",
+      color: "#991b1b",
+      lineHeight: "1.4",
+      maxWidth: "240px",
+    }}
+  >
+    ⚠️ <strong>Erro:</strong>{" "}
+    {a.error || a.errorMessage || a.lastError}
+  </div>
+)}
 </td>
 
       {/* 🔹 AÇÕES */}
