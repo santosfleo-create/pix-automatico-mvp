@@ -88,12 +88,17 @@ function ScrollToHash() {
 
   useEffect(() => {
     if (!location.hash) return;
-    // aguarda a pintura da página (Landing montada) antes de procurar o alvo
     const id = location.hash.replace("#", "");
+
+    // aguarda renderização completa da Landing
     const timer = setTimeout(() => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 0);
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 120; // offset do topo fixo
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }, 700); // espera 0.7s para garantir render do conteúdo
+
     return () => clearTimeout(timer);
   }, [location.pathname, location.hash]);
 
