@@ -228,57 +228,57 @@ export default function ClientDetails() {
       <td>R$ {a.value}</td>
       <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
 
-      {/* 🔹 STATUS COLORIDO */}
-      <td>
-        <span
-          className="badge"
-          style={{
-            background:
-              a.status === "paid"
-                ? "#d1fae5" // verde claro
-                : a.status === "failed"
-                ? "#fee2e2" // vermelho claro
-                : a.status === "refund_failed"
-                ? "#fee2e2" // vermelho claro
-                : a.status === "reembolsado"
-                ? "#bfdbfe" // azul claro
-                : a.status === "pendente"
-                ? "#fef9c3" // amarelo muito claro
-                : "#e5e7eb", // cinza padrão
-            color:
-              a.status === "paid"
-                ? "#065f46"
-                : a.status === "failed"
-                ? "#991b1b"
-                : a.status === "refund_failed"
-                ? "#92400e"
-                : a.status === "reembolsado"
-                ? "#1e40af"
-                : a.status === "pendente"
-                ? "#78350f"
-                : "#374151",
-            padding: "4px 8px",
-            borderRadius: "8px",
-            fontWeight: 500,
-            fontSize: "13px",
-            display: "inline-block",
-          }}
-        >
-          {a.status === "paid"
-            ? "Pago"
-            : a.status === "failed"
-            ? "Falhou"
-            : a.status === "refund_failed"
-            ? "Falha no reembolso"
-            : a.status === "reembolsado"
-            ? "Reembolsado"
-            : a.status === "pendente"
-            ? "Pendente"
-            : a.status === "confirmada"
-            ? "Confirmada"
-            : a.status}
-        </span>
-         {/* 🔸 Mostra o erro abaixo, se existir */}
+      {/* 🔹 STATUS COLORIDO + MENSAGEM DE ERRO */}
+<td>
+  <div
+    style={{
+      background:
+        a.status === "paid"
+          ? "#d1fae5" // verde claro
+          : a.status === "failed"
+          ? "#fee2e2" // vermelho claro
+          : a.status === "refund_failed"
+          ? "#fee2e2" // vermelho claro
+          : a.status === "reembolsado"
+          ? "#bfdbfe" // azul claro
+          : a.status === "pendente"
+          ? "#fef9c3" // amarelo muito claro
+          : "#e5e7eb", // cinza padrão
+      color:
+        a.status === "paid"
+          ? "#065f46"
+          : a.status === "failed"
+          ? "#991b1b"
+          : a.status === "refund_failed"
+          ? "#92400e"
+          : a.status === "reembolsado"
+          ? "#1e40af"
+          : a.status === "pendente"
+          ? "#78350f"
+          : "#374151",
+      padding: "4px 8px",
+      borderRadius: "8px",
+      fontWeight: 500,
+      fontSize: "13px",
+      display: "inline-block",
+    }}
+  >
+    {a.status === "paid"
+      ? "Pago"
+      : a.status === "failed"
+      ? "Falhou"
+      : a.status === "refund_failed"
+      ? "Falha no reembolso"
+      : a.status === "reembolsado"
+      ? "Reembolsado"
+      : a.status === "pendente"
+      ? "Pendente"
+      : a.status === "confirmada"
+      ? "Confirmada"
+      : a.status}
+  </div>
+
+  {/* 🔸 Mostra o erro abaixo, se existir */}
   {a.error && (
     <div
       style={{
@@ -291,8 +291,8 @@ export default function ClientDetails() {
     >
       ⚠️ <strong>Erro:</strong> {a.error}
     </div>
-  )
-      </td>
+  )}
+</td>
 
       {/* 🔹 AÇÕES */}
 <td>
