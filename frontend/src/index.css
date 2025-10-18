@@ -10,7 +10,7 @@ body { background: #f7f8fa; font-family: -apple-system, BlinkMacSystemFont, 'Seg
 .topbar { position: sticky; top:0; z-index: 10; background:#ffffff; border-bottom:1px solid #e5e7eb; }
 .topbar-inner { max-width: 1100px; margin: 0 auto; padding: 14px 20px; display:flex; align-items:center; gap:10px; }
 .app-container {
-  min-height: auto; /* 👈 não força a altura total */
+  min-height: 95%; /* 👈 não força a altura total */
   padding-bottom: 60px; /* 👈 mantém espaçamento visual pro rodapé */
   overflow-y: auto; /* 👈 só rola se o conteúdo for realmente maior */
 }
