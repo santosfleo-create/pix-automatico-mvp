@@ -46,7 +46,7 @@ function MvpBanner() {
         borderBottom: "1px solid #f2e8a0", // borda sutil
       }}
     >
-      ⚡ Versão pública de demonstração — O sistema está em fase de testes e alguns dados podem ser reiniciados.
+      ⚡ Versão pública de demonstração — O sistema está em fase de testes e alguns dados podem ser apagados.
     </div>
   );
 }
