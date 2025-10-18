@@ -117,17 +117,88 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* 💻 Demonstração do Sistema */}
+      <section
+        style={{
+          background: "#f7f8fa",
+          padding: "60px 16px",
+          textAlign: "center",
+          borderTop: "1px solid #e5e7eb",
+        }}
+      >
+        <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
+          💻 Veja como funciona na prática
+        </h3>
+        <p
+          style={{
+            color: "#4b5563",
+            maxWidth: "600px",
+            margin: "10px auto 40px auto",
+            fontSize: "16px",
+          }}
+        >
+          Interface simples e intuitiva — já em uso real na fase Beta pública.
+        </p>
+
+        {/* Galeria de screenshots */}
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "24px",
+          }}
+        >
+          <img
+            src="/screenshots/desktop-clients.png"
+            alt="Tela de clientes — versão desktop"
+            style={{
+              width: "420px",
+              borderRadius: "12px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+            }}
+          />
+          <img
+            src="/screenshots/desktop-details.png"
+            alt="Tela de autorizações — versão desktop"
+            style={{
+              width: "420px",
+              borderRadius: "12px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+            }}
+          />
+          <img
+            src="/screenshots/android-simple.png"
+            alt="Tela do aplicativo Android"
+            style={{
+              width: "240px",
+              borderRadius: "20px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+            }}
+          />
+          <img
+            src="/screenshots/iphone-simple.png"
+            alt="Tela do aplicativo iPhone"
+            style={{
+              width: "240px",
+              borderRadius: "26px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+            }}
+          />
+        </div>
+      </section>
+
       {/* 💬 Seção de feedback */}
-<section
-  id="feedback"
-  style={{
-    background: "#ffffff",
-    marginTop: "40px",
-    padding: "40px 16px",
-    borderTop: "2px solid #d1fae5",
-    scrollMarginTop: "100px", // evita que o cabeçalho esconda o topo
-  }}
->
+      <section
+        id="feedback"
+        style={{
+          background: "#ffffff",
+          marginTop: "40px",
+          padding: "40px 16px",
+          borderTop: "2px solid #d1fae5",
+          scrollMarginTop: "100px",
+        }}
+      >
         <div style={{ textAlign: "center", marginBottom: "20px" }}>
           <h3 style={{ color: "#15803d", fontSize: "22px", fontWeight: 600 }}>
             💬 Envie seu feedback
@@ -146,7 +217,6 @@ export default function Landing() {
           </p>
         </div>
 
-        {/* 📋 Formulário Google */}
         <div
           style={{
             maxWidth: "700px",
