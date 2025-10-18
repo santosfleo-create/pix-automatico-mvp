@@ -278,6 +278,20 @@ export default function ClientDetails() {
             ? "Confirmada"
             : a.status}
         </span>
+         {/* 🔸 Mostra o erro abaixo, se existir */}
+  {a.error && (
+    <div
+      style={{
+        marginTop: "4px",
+        fontSize: "12px",
+        color: "#991b1b",
+        lineHeight: "1.4",
+        maxWidth: "220px",
+      }}
+    >
+      ⚠️ <strong>Erro:</strong> {a.error}
+    </div>
+  )
       </td>
 
       {/* 🔹 AÇÕES */}
