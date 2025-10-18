@@ -178,6 +178,7 @@ export default function ClientDetails() {
               let number = parseFloat(raw) / 100;
               setValue(number.toLocaleString("pt-BR", { minimumFractionDigits: 2 }));
             }}
+            onKeyDown={(e) => e.key === "Enter" && addAuthorization()}
             style={{ width: 120, textAlign: "right" }}
           />
           <select className="select" value={interval} onChange={(e) => setInterval(e.target.value)} style={{ width: 120 }}>
@@ -192,6 +193,7 @@ export default function ClientDetails() {
             placeholder="Descrição"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && addAuthorization()}
             style={{ width: 200 }}
           />
           <button className="btn" onClick={addAuthorization} style={{ minWidth: 150 }}>
