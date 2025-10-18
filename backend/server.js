@@ -5,6 +5,25 @@ const { v4: uuidv4 } = require("uuid");
 const app = express();
 app.use(express.json());
 
+// 🔹 Lista de erros Pix (BACEN)
+const PIX_ERRORS = [
+  { code: "AC03", desc: "Conta do destinatário inválida." },
+  { code: "AC06", desc: "Conta do destinatário encerrada." },
+  { code: "BE05", desc: "CPF/CNPJ do recebedor inválido." },
+  { code: "RJ02", desc: "Transação rejeitada pelo participante recebedor." },
+  { code: "RJ07", desc: "Transação duplicada." },
+  { code: "RJ11", desc: "Valor da transação inválido." },
+  { code: "RJ12", desc: "Transação não permitida para o tipo de conta." },
+  { code: "RJ27", desc: "Participante não autorizado a operar com Pix." },
+  { code: "RJ98", desc: "Falha técnica no participante recebedor." },
+  { code: "RJ99", desc: "Erro não especificado pelo participante recebedor." },
+];
+
+// 🔹 Função utilitária para sortear erro Pix aleatório
+function randomPixError() {
+  return PIX_ERRORS[Math.floor(Math.random() * PIX_ERRORS.length)];
+}
+
 // -------------------- CONFIGURAÇÃO DE CORS --------------------
 app.use(
   cors({
@@ -117,16 +136,20 @@ app.post("/api/trigger-charge", (req, res) => {
   if (!auth)
     return res.status(404).json({ error: "Autorização não encontrada." });
 
-  const success = Math.random() > 0.2;
+  const success = Math.random() > 0.2; // 80% chance de sucesso
+
   if (success) {
     auth.status = "paid";
     auth.paidAt = new Date().toLocaleString("pt-BR", {
       timeZone: "America/Sao_Paulo",
     });
+    delete auth.reason_code;
+    delete auth.reason_desc;
   } else {
     auth.status = "failed";
-    auth.reason_code = "PIX_FAILURE";
-    auth.reason_desc = "Falha ao processar cobrança Pix.";
+    const err = randomPixError();
+    auth.reason_code = err.code;
+    auth.reason_desc = err.desc;
   }
 
   res.json({ success, status: auth.status, authorization: auth });
@@ -140,18 +163,19 @@ app.post("/api/retry-charge", (req, res) => {
     return res.status(404).json({ error: "Autorização não encontrada." });
 
   const success = Math.random() > 0.2;
+
   if (success) {
     auth.status = "paid";
     auth.paidAt = new Date().toLocaleString("pt-BR", {
       timeZone: "America/Sao_Paulo",
     });
-    // 🧹 limpa erros antigos
     delete auth.reason_code;
     delete auth.reason_desc;
   } else {
     auth.status = "failed";
-    auth.reason_code = "PIX_FAILURE";
-    auth.reason_desc = "Falha ao processar cobrança Pix.";
+    const err = randomPixError();
+    auth.reason_code = err.code;
+    auth.reason_desc = err.desc;
   }
 
   res.json({ success, authorization: auth });
@@ -165,21 +189,25 @@ app.post("/api/refund", (req, res) => {
     return res.status(404).json({ error: "Autorização não encontrada." });
 
   if (auth.status !== "paid" && auth.status !== "refund_failed")
-  return res.status(400).json({ error: "Somente cobranças pagas ou com falha de reembolso podem ser reprocessadas." });
+    return res
+      .status(400)
+      .json({ error: "Somente cobranças pagas ou com falha de reembolso podem ser reprocessadas." });
 
-  const success = Math.random() > 0.1;
+  const success = Math.random() > 0.1; // 90% chance de sucesso
+
   if (success) {
-  auth.status = "reembolsado";
-  auth.refundAt = new Date().toLocaleString("pt-BR", {
-    timeZone: "America/Sao_Paulo",
-  });
-  delete auth.reason_code;
-  delete auth.reason_desc;
-} else {
-  auth.status = "refund_failed";
-  auth.reason_code = "REFUND_DENIED";
-  auth.reason_desc = "Falha ao processar reembolso.";
-}
+    auth.status = "reembolsado";
+    auth.refundAt = new Date().toLocaleString("pt-BR", {
+      timeZone: "America/Sao_Paulo",
+    });
+    delete auth.reason_code;
+    delete auth.reason_desc;
+  } else {
+    auth.status = "refund_failed";
+    const err = randomPixError();
+    auth.reason_code = err.code;
+    auth.reason_desc = err.desc;
+  }
 
   res.json({ success, status: auth.status, authorization: auth });
 });
