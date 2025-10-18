@@ -15,8 +15,15 @@ function formatDateTime(dateString) {
     date = new Date(year, month - 1, day, hour, minute);
   }
   if (isNaN(date.getTime())) return "—";
-  const data = date.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
-  const hora = date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+  const data = date.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+  const hora = date.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
   return `${data} às ${hora}`;
 }
 
@@ -25,30 +32,64 @@ export default function Clients() {
   const [name, setName] = useState("");
   const navigate = useNavigate();
 
+  // 🧩 Corrige scroll: remove só se conteúdo couber na tela
+  useEffect(() => {
+    const checkScroll = () => {
+      const contentHeight = document.body.scrollHeight;
+      const windowHeight = window.innerHeight;
+      if (contentHeight <= windowHeight) {
+        document.body.style.overflowY = "hidden";
+      } else {
+        document.body.style.overflowY = "auto";
+      }
+    };
+
+    checkScroll();
+    window.addEventListener("resize", checkScroll);
+
+    return () => {
+      document.body.style.overflowY = "auto";
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
+
   async function refresh() {
     const data = await listClients();
     setClients(data);
   }
 
   useEffect(() => {
-  // Desativa o scroll quando esta página está aberta
-  document.body.style.overflowY = "hidden";
+    refresh();
+  }, []);
 
-  // Reativa o scroll quando sai da página
-  return () => {
-    document.body.style.overflowY = "auto";
-  };
-}, []);
+  // ✅ nome certo da função
+  async function addClient() {
+    if (!name.trim()) return alert("Informe o nome do cliente.");
+    await createClient(name.trim());
+    setName("");
+    refresh();
+  }
 
   return (
-    <div className="spacer-top" style={{ minHeight: "calc(100vh - 160px)" }}>
+    <div className="spacer-top">
       <div
         className="card container-narrow"
-        style={{ width: "900px", maxWidth: "95%", padding: "40px 50px" }}
+        style={{
+          width: "900px",
+          maxWidth: "95%",
+          padding: "40px 50px",
+        }}
       >
         <h2 style={{ textAlign: "center", marginBottom: 20 }}>Clientes</h2>
 
-        <div className="form-row" style={{ justifyContent: "center", marginBottom: 10 }}>
+        {/* Campo + Botão */}
+        <div
+          className="form-row"
+          style={{
+            justifyContent: "center",
+            marginBottom: 10,
+          }}
+        >
           <input
             className="input"
             placeholder="Nome do cliente"
@@ -58,13 +99,26 @@ export default function Clients() {
             style={{ minWidth: 220 }}
           />
           <button
-            className="btn"
-            onClick={addClient}  // ✅ agora chama a função correta
+            style={{
+              backgroundColor: "#38b49c",
+              color: "#fff",
+              border: "none",
+              borderRadius: "6px",
+              padding: "8px 16px",
+              fontWeight: 600,
+              cursor: "pointer",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+              transition: "background 0.2s",
+            }}
+            onClick={addClient} // 👈 corrigido
+            onMouseEnter={(e) => (e.target.style.backgroundColor = "#2e9b85")}
+            onMouseLeave={(e) => (e.target.style.backgroundColor = "#38b49c")}
           >
             Adicionar
           </button>
         </div>
 
+        {/* Lista */}
         {clients.length === 0 ? (
           <p style={{ textAlign: "center", color: "#555", marginTop: 20 }}>
             Sem clientes. Adicione o seu primeiro cliente acima.
@@ -74,9 +128,9 @@ export default function Clients() {
             <table className="table">
               <thead>
                 <tr>
-                  {["Nome", "Cliente desde", "Ações"].map((label) => (
-                    <th key={label}>{label}</th>
-                  ))}
+                  <th>Nome</th>
+                  <th>Cliente desde</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,17 +138,19 @@ export default function Clients() {
                   <tr
                     key={c.id}
                     className="row-click"
-                    style={{ userSelect: "none", cursor: "pointer" }}
+                    onClick={() => navigate(`/clients/${c.id}`)}
                   >
-                    <td onClick={() => navigate(`/clients/${c.id}`)}>{c.name}</td>
-                    <td onClick={() => navigate(`/clients/${c.id}`)}>
-                      {formatDateTime(c.createdAt)}
-                    </td>
+                    <td>{c.name}</td>
+                    <td>{formatDateTime(c.createdAt)}</td>
                     <td>
                       <button
                         onClick={async (e) => {
                           e.stopPropagation();
-                          if (window.confirm("Tem certeza que deseja deletar este cliente?")) {
+                          if (
+                            window.confirm(
+                              "Tem certeza que deseja deletar este cliente?"
+                            )
+                          ) {
                             await deleteClient(c.id);
                             await refresh();
                           }
@@ -109,8 +165,12 @@ export default function Clients() {
                           fontSize: "13px",
                           transition: "background 0.3s ease",
                         }}
-                        onMouseOver={(e) => (e.currentTarget.style.background = "#dc2626")}
-                        onMouseOut={(e) => (e.currentTarget.style.background = "#ef4444")}
+                        onMouseOver={(e) =>
+                          (e.currentTarget.style.background = "#dc2626")
+                        }
+                        onMouseOut={(e) =>
+                          (e.currentTarget.style.background = "#ef4444")
+                        }
                       >
                         Deletar
                       </button>
