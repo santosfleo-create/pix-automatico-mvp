@@ -281,90 +281,75 @@ export default function ClientDetails() {
       </td>
 
       {/* 🔹 AÇÕES */}
-      <td>
-        {a.status === "failed" || a.status === "refund_failed" ? (
-          <button
-            className="btn"
-            onClick={async () => {
-              try {
-                if (a.status === "failed") {
-                  await retryCharge(a.id);
-                } else if (a.status === "refund_failed") {
-                  await refundAuthorization(a.id);
-                }
-                await refresh();
-              } catch (err) {
-                console.error("Erro ao tentar novamente:", err);
-              }
-            }}
-            style={{ minWidth: 160 }}
-          >
-            {a.status === "refund_failed"
-              ? "Tentar reembolso novamente"
-              : "Tentar novamente"}
-          </button>
-        ) : a.status === "paid" ? (
-          <>
-            <a
-              className="btn-link"
-              href={`${
-                import.meta.env.VITE_API_BASE || "http://localhost:4000"
-              }/invoice/${a.id}`}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                marginRight: 8,
-                background: "#38b49c",
-                color: "#fff",
-                borderRadius: "6px",
-                padding: "4px 12px",
-                display: "inline-block",
-                textDecoration: "none",
-                fontSize: "13px",
-                lineHeight: "20px",
-                height: "22px",
-              }}
-            >
-              Fatura
-            </a>
-            <button
-              className="btn"
-              onClick={() => triggerRefund(a.id)}
-              style={{ minWidth: 110 }}
-            >
-              Reembolsar
-            </button>
-          </>
-        ) : a.status === "reembolsado" ? (
-          <a
-            className="btn-link"
-            href={`${
+<td>
+  {a.status === "failed" || a.status === "refund_failed" ? (
+    <button
+      className="btn"
+      onClick={async () => {
+        try {
+          if (a.status === "failed") {
+            await retryCharge(a.id);
+          } else if (a.status === "refund_failed") {
+            await refundAuthorization(a.id);
+          }
+          await refresh();
+        } catch (err) {
+          console.error("Erro ao tentar novamente:", err);
+        }
+      }}
+      style={{ minWidth: 160 }}
+    >
+      {a.status === "refund_failed"
+        ? "Tentar reembolso novamente"
+        : "Tentar novamente"}
+    </button>
+  ) : a.status === "paid" ? (
+    <>
+      <button
+        className="btn"
+        onClick={() =>
+          window.open(
+            `${
               import.meta.env.VITE_API_BASE || "http://localhost:4000"
-            }/credit-note/${a.id}`}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              background: "#38b49c",
-              color: "#fff",
-              borderRadius: "6px",
-              padding: "4px 12px",
-              display: "inline-block",
-              textDecoration: "none",
-              fontSize: "13px",
-              lineHeight: "20px",
-              height: "28px",
-            }}
-          >
-            Nota de crédito
-          </a>
-        ) : a.status === "pendente" ? (
-          <button className="btn" onClick={() => triggerCharge(a.id)}>
-            Cobrar
-          </button>
-        ) : (
-          "-"
-        )}
-      </td>
+            }/invoice/${a.id}`,
+            "_blank"
+          )
+        }
+        style={{ minWidth: 100, marginRight: 8 }}
+      >
+        Fatura
+      </button>
+      <button
+        className="btn"
+        onClick={() => triggerRefund(a.id)}
+        style={{ minWidth: 110 }}
+      >
+        Reembolsar
+      </button>
+    </>
+  ) : a.status === "reembolsado" ? (
+    <button
+      className="btn"
+      onClick={() =>
+        window.open(
+          `${
+            import.meta.env.VITE_API_BASE || "http://localhost:4000"
+          }/credit-note/${a.id}`,
+          "_blank"
+        )
+      }
+      style={{ minWidth: 140 }}
+    >
+      Nota de crédito
+    </button>
+  ) : a.status === "pendente" ? (
+    <button className="btn" onClick={() => triggerCharge(a.id)}>
+      Cobrar
+    </button>
+  ) : (
+    "-"
+  )}
+</td>
 
       {/* 🔹 DELETAR */}
       <td>
