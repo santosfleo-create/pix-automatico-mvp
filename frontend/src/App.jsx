@@ -46,7 +46,7 @@ function MvpBanner() {
         borderBottom: "1px solid #fcd34d",
       }}
     >
-      ⚡ Versão MVP em testes — dados e cadastros podem ser apagados a qualquer momento.
+      ⚡ Versão pública de demonstração — o sistema está em fase de testes e alguns dados podem ser reiniciados.
     </div>
   );
 }
