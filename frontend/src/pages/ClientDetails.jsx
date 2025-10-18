@@ -228,7 +228,7 @@ export default function ClientDetails() {
       <td>R$ {a.value}</td>
       <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
 
-      {/* 🔹 STATUS COLORIDO + MENSAGEM DE ERRO */}
+      {/* 🔹 STATUS COLORIDO + MENSAGEM DO BANCO CENTRAL */}
 <td>
   <div
     style={{
@@ -242,8 +242,8 @@ export default function ClientDetails() {
           : a.status === "reembolsado"
           ? "#bfdbfe" // azul claro
           : a.status === "pendente"
-          ? "#fef9c3" // amarelo muito claro
-          : "#e5e7eb", // cinza padrão
+          ? "#fef9c3" // amarelo claro
+          : "#e5e7eb", // cinza neutro
       color:
         a.status === "paid"
           ? "#065f46"
@@ -278,20 +278,23 @@ export default function ClientDetails() {
       : a.status}
   </div>
 
-  {/* 🔸 Mostra o motivo (reason) abaixo, se existir */}
-{a.reason_code && (
-  <div
-    style={{
-      marginTop: "4px",
-      fontSize: "12px",
-      color: "#991b1b",
-      lineHeight: "1.4",
-      maxWidth: "240px",
-    }}
-  >
-    ⚠️ <strong>{a.reason_code}:</strong> {a.reason_desc}
-  </div>
-)}
+  {/* 🔸 Mostra o retorno do Banco Central se existir */}
+  {a.reason_code && a.reason_desc && (
+    <div
+      style={{
+        marginTop: "5px",
+        fontSize: "12.5px",
+        color: "#991b1b",
+        lineHeight: "1.5",
+        background: "rgba(254, 226, 226, 0.3)", // vermelho suave de fundo
+        borderRadius: "6px",
+        padding: "6px 8px",
+        maxWidth: "260px",
+      }}
+    >
+      ⚠️ <strong>{a.reason_code}</strong>: {a.reason_desc}
+    </div>
+  )}
 </td>
 
       {/* 🔹 AÇÕES */}
