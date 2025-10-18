@@ -125,6 +125,43 @@ function App() {
         </Routes>
       </div>
 
+      import { useNavigate, useLocation } from "react-router-dom";
+
+// ...
+
+function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function handleFeedbackClick(e) {
+    e.preventDefault();
+
+    if (location.pathname === "/") {
+      // Já está na landing → apenas rola até o feedback
+      const feedback = document.getElementById("feedback");
+      if (feedback) feedback.scrollIntoView({ behavior: "smooth" });
+    } else {
+      // Está em outra página → vai para a landing e depois rola
+      navigate("/#feedback");
+      setTimeout(() => {
+        const feedback = document.getElementById("feedback");
+        if (feedback) feedback.scrollIntoView({ behavior: "smooth" });
+      }, 500);
+    }
+  }
+
+  return (
+    <BrowserRouter>
+      <TopBar />
+      <MvpBanner />
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/clients/:id" element={<ClientDetails />} />
+        </Routes>
+      </div>
+
       {/* 🔹 Botão flutuante de feedback */}
       <a
         href="/#feedback"
