@@ -322,7 +322,7 @@ export default function ClientDetails() {
                 textDecoration: "none",
                 fontSize: "13px",
                 lineHeight: "20px",
-                height: "28px",
+                height: "22px",
               }}
             >
               Fatura
