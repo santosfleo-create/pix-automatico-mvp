@@ -227,7 +227,17 @@ export default function ClientDetails() {
                       <td>{a.description}</td>
                       <td>R$ {a.value}</td>
                       <td>{getNextChargeDate(a.interval, a.createdAt)}</td>
-                      <td>{a.status}</td>
+                      <td>
+  {a.status === "paid"
+    ? "Pago"
+    : a.status === "pending"
+    ? "Pendente"
+    : a.status === "failed"
+    ? "Falhou"
+    : a.status === "reembolsado"
+    ? "Reembolsado"
+    : a.status}
+</td>
                       <td>
                         {a.status === "failed" || a.status === "refund_failed" ? (
                           <button className="btn" onClick={() => triggerRetry(a.id)} style={{ minWidth: 160 }}>
