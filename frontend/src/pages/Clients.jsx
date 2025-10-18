@@ -78,6 +78,7 @@ export default function Clients() {
           width: "900px",
           maxWidth: "95%",
           padding: "40px 50px",
+          height: "95%",
         }}
       >
         <h2 style={{ textAlign: "center", marginBottom: 20 }}>Clientes</h2>
