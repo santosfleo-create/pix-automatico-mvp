@@ -239,7 +239,7 @@ export default function ClientDetails() {
                 : a.status === "failed"
                 ? "#fee2e2" // vermelho claro
                 : a.status === "refund_failed"
-                ? "#fde68a" // amarelo
+                ? "#fee2e2" // vermelho claro
                 : a.status === "reembolsado"
                 ? "#bfdbfe" // azul claro
                 : a.status === "pendente"
