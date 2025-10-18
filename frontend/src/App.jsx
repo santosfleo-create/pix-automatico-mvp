@@ -66,7 +66,7 @@ function Footer() {
         marginTop: "40px",
       }}
     >
-      💚 <strong>Pix Automático</strong> — Projeto Beta Validando Ideia • Feito no Brasil 🇧🇷
+      💚 <strong>Pix Automático</strong> — Projeto Beta Público © 2025 • Feito no Brasil 🇧🇷
     </footer>
   );
 }
