@@ -112,4 +112,6 @@ function App() {
   💬 Feedback
 </a>
 
-<Footer /> {/* 👈 aparece em todas as páginas */}
+<Footer /> {/* 👈 aparece em todas as páginas */} </BrowserRouter> ); }
+
+createRoot(document.getElementById("root")).render(<App />);
