@@ -9,6 +9,60 @@ import {
   deleteAuthorization,
 } from "../api.js";
 
+// Normaliza código/descrição de erro vindos do backend de simulação
+function extractBacenError(a) {
+  if (!a) return null;
+
+  // 1) formato direto
+  if (a.reason_code || a.reason_desc) {
+    return {
+      code: a.reason_code || a.reasonCode || a.code,
+      desc: a.reason_desc || a.reasonDesc || a.description || a.message,
+    };
+  }
+
+  // 2) variações comuns
+  const code =
+    a.error_code || a.errorCode || a.failureCode || a.bacenCode || a.code;
+  const desc =
+    a.error_description ||
+    a.errorDescription ||
+    a.failureDescription ||
+    a.bacenDescription ||
+    a.description ||
+    a.message;
+
+  if (code || desc) return { code, desc };
+
+  // 3) aninhados comuns
+  const nested =
+    a.error ||
+    a.last_error ||
+    a.lastError ||
+    a.lastAttempt?.error ||
+    a.failure ||
+    a.details?.error;
+
+  if (nested) {
+    const nCode =
+      nested.reason_code ||
+      nested.reasonCode ||
+      nested.error_code ||
+      nested.errorCode ||
+      nested.code;
+    const nDesc =
+      nested.reason_desc ||
+      nested.reasonDesc ||
+      nested.error_description ||
+      nested.errorDescription ||
+      nested.description ||
+      nested.message;
+    if (nCode || nDesc) return { code: nCode, desc: nDesc };
+  }
+
+  return null;
+}
+
 function formatDateTime(isoString) {
   if (!isoString) return "—";
   let date;
