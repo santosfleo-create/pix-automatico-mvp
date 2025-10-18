@@ -84,3 +84,44 @@ body { background: #f7f8fa; font-family: -apple-system, BlinkMacSystemFont, 'Seg
   .btn, .btn-link { height:36px; font-size:13px; padding:8px 12px; }
   .table th, .table td { padding:8px; }
 }
+
+/* --- Badges de status (melhoradas) --- */
+.badge {
+  display: inline-block;
+  font-weight: 500;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: none;
+  letter-spacing: 0.1px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease;
+}
+
+/* Suave destaque ao passar o mouse */
+.badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+/* Status específicos (caso queira reaproveitar via classes) */
+.badge-paid {
+  background: #d1fae5;
+  color: #065f46;
+}
+.badge-pendente {
+  background: #fef9c3;
+  color: #78350f;
+}
+.badge-failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.badge-reembolsado {
+  background: #bfdbfe;
+  color: #1e40af;
+}
+.badge-refund_failed {
+  background: #fde68a;
+  color: #92400e;
+}
