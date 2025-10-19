@@ -150,14 +150,16 @@ export default function Landing() {
           }}
         >
             <img
-            src="/screenshots/desktop-details.png"
-            alt="Tela de autorizações — versão desktop"
-            style={{
-              width: "420px",
-              borderRadius: "12px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-            }}
-          />
+  src="/screenshots/desktop-details.png"
+  alt="Tela de autorizações — versão desktop"
+  style={{
+    maxWidth: "90%",
+    height: "auto",
+    borderRadius: "12px",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+    objectFit: "contain",
+  }}
+/>
           <img
             src="/screenshots/android-simple.png"
             alt="Tela do aplicativo Android"
