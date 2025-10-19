@@ -2,6 +2,20 @@
 import React from "react";
 
 export default function Landing() {
+  // Função auxiliar para enviar eventos ao GA4
+  const trackEvent = (eventName, label) => {
+    if (window.gtag) {
+      window.gtag("event", eventName, {
+        event_category: "CTA",
+        event_label: label,
+        value: 1,
+      });
+      console.log("GA event sent:", eventName, label);
+    } else {
+      console.warn("⚠️ gtag não encontrado — GA4 ainda não carregou.");
+    }
+  };
+
   return (
     <main
       style={{
@@ -69,9 +83,10 @@ export default function Landing() {
           gerar cobranças recorrentes e automatizar reembolsos — tudo 100% via Pix.
         </p>
 
-        {/* 🚀 Botão principal */}
+        {/* 🚀 Botão principal (primeiro CTA) */}
         <a
           href="/clients"
+          onClick={() => trackEvent("access_system_click_top", "Botão topo")}
           style={{
             display: "inline-block",
             background: "#38b49c",
@@ -118,155 +133,157 @@ export default function Landing() {
       </section>
 
       {/* 💻 Demonstração do Sistema */}
-<section
-  style={{
-    background: "#f7f8fa",
-    padding: "60px 16px",
-    textAlign: "center",
-    borderTop: "1px solid #e5e7eb",
-  }}
->
-  <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
-    ⚙️ Veja o Pix Automático em ação
-  </h3>
-  <p
-    style={{
-      color: "#4b5563",
-      maxWidth: "600px",
-      margin: "10px auto 40px auto",
-      fontSize: "16px",
-    }}
-  >
-    Interface responsiva — totalmente compatível com computadores e celulares.
-  </p>
+      <section
+        style={{
+          background: "#f7f8fa",
+          padding: "60px 16px",
+          textAlign: "center",
+          borderTop: "1px solid #e5e7eb",
+        }}
+      >
+        <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
+          ⚙️ Veja o Pix Automático em ação
+        </h3>
+        <p
+          style={{
+            color: "#4b5563",
+            maxWidth: "600px",
+            margin: "10px auto 40px auto",
+            fontSize: "16px",
+          }}
+        >
+          Interface responsiva — totalmente compatível com computadores e celulares.
+        </p>
 
-  {/* 💻 VERSÃO DESKTOP */}
-  <h4
-    style={{
-      color: "#166534",
-      fontSize: "20px",
-      fontWeight: 600,
-      marginBottom: "20px",
-      marginTop: "20px",
-    }}
-  >
-    💻 Versão Desktop
-  </h4>
-  <div
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      marginBottom: "60px",
-    }}
-  >
-    <img
-      src="/screenshots/desktop-details.png"
-      alt="Tela de autorizações — versão desktop"
-      style={{
-        maxWidth: "80%",
-        height: "auto",
-        borderRadius: "12px",
-        boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-        objectFit: "contain",
-      }}
-    />
-  </div>
+        {/* 💻 VERSÃO DESKTOP */}
+        <h4
+          style={{
+            color: "#166534",
+            fontSize: "20px",
+            fontWeight: 600,
+            marginBottom: "20px",
+            marginTop: "20px",
+          }}
+        >
+          💻 Versão Desktop
+        </h4>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "60px",
+          }}
+        >
+          <img
+            src="/screenshots/desktop-details.png"
+            alt="Tela de autorizações — versão desktop"
+            style={{
+              maxWidth: "80%",
+              height: "auto",
+              borderRadius: "12px",
+              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+              objectFit: "contain",
+            }}
+          />
+        </div>
 
-  {/* 📱 VERSÃO MOBILE */}
-  <h4
-    style={{
-      color: "#166534",
-      fontSize: "20px",
-      fontWeight: 600,
-      marginBottom: "20px",
-    }}
-  >
-    📱 Versão Mobile
-  </h4>
-  <div
-    style={{
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      gap: "24px",
-    }}
-  >
-    <img
-      src="/screenshots/android-simple.png"
-      alt="Tela Android — autorizações"
-      style={{
-        width: "220px",
-        borderRadius: "24px",
-        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-      }}
-    />
-    <img
-      src="/screenshots/iphone-simple.png"
-      alt="Tela iPhone — clientes"
-      style={{
-        width: "220px",
-        borderRadius: "24px",
-        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-      }}
-    />
-      <img
-      src="/screenshots/android-reembolsar.png"
-      alt="Tela Android — tela de reembolso"
-      style={{
-        width: "220px",
-        borderRadius: "24px",
-        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-      }}
-    />
-  </div>
-</section>
+        {/* 📱 VERSÃO MOBILE */}
+        <h4
+          style={{
+            color: "#166534",
+            fontSize: "20px",
+            fontWeight: 600,
+            marginBottom: "20px",
+          }}
+        >
+          📱 Versão Mobile
+        </h4>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "24px",
+          }}
+        >
+          <img
+            src="/screenshots/android-simple.png"
+            alt="Tela Android — autorizações"
+            style={{
+              width: "220px",
+              borderRadius: "24px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+            }}
+          />
+          <img
+            src="/screenshots/iphone-simple.png"
+            alt="Tela iPhone — clientes"
+            style={{
+              width: "220px",
+              borderRadius: "24px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+            }}
+          />
+          <img
+            src="/screenshots/android-reembolsar.png"
+            alt="Tela Android — tela de reembolso"
+            style={{
+              width: "220px",
+              borderRadius: "24px",
+              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+            }}
+          />
+        </div>
+      </section>
 
       {/* 🔁 Segundo CTA */}
-<section
-  style={{
-    background: "#f7f8fa",
-    padding: "50px 16px",
-    textAlign: "center",
-    borderTop: "1px solid #e5e7eb",
-  }}
->
-  <h3
-    style={{
-      color: "#166534",
-      fontSize: "22px",
-      fontWeight: 600,
-      marginBottom: "12px",
-    }}
-  >
-    Pronto para testar o Pix Automático?
-  </h3>
-  <p
-    style={{
-      color: "#4b5563",
-      fontSize: "16px",
-      marginBottom: "24px",
-    }}
-  >
-    Leva menos de 1 minuto para criar sua primeira autorização e simular uma cobrança via Pix.
-  </p>
-  <a
-    href="/clients"
-    style={{
-      display: "inline-block",
-      background: "#38b49c",
-      color: "#fff",
-      padding: "12px 28px",
-      borderRadius: 12,
-      textDecoration: "none",
-      fontSize: 18,
-      fontWeight: 600,
-      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      transition: "background 0.3s ease",
-    }}
-  >
-    🚀 Acessar o Sistema
-  </a>
-</section>
+      <section
+        style={{
+          background: "#f7f8fa",
+          padding: "50px 16px",
+          textAlign: "center",
+          borderTop: "1px solid #e5e7eb",
+        }}
+      >
+        <h3
+          style={{
+            color: "#166534",
+            fontSize: "22px",
+            fontWeight: 600,
+            marginBottom: "12px",
+          }}
+        >
+          Pronto para testar o Pix Automático?
+        </h3>
+        <p
+          style={{
+            color: "#4b5563",
+            fontSize: "16px",
+            marginBottom: "24px",
+          }}
+        >
+          Leva menos de 1 minuto para criar sua primeira autorização e simular uma cobrança via Pix.
+        </p>
+        {/* 🚀 Segundo botão (CTA inferior) */}
+        <a
+          href="/clients"
+          onClick={() => trackEvent("access_system_click_bottom", "Botão final")}
+          style={{
+            display: "inline-block",
+            background: "#38b49c",
+            color: "#fff",
+            padding: "12px 28px",
+            borderRadius: 12,
+            textDecoration: "none",
+            fontSize: 18,
+            fontWeight: 600,
+            boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+            transition: "background 0.3s ease",
+          }}
+        >
+          🚀 Acessar o Sistema
+        </a>
+      </section>
 
       {/* 💬 Seção de feedback */}
       <section
