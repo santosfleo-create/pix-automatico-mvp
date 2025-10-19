@@ -74,7 +74,7 @@ function Footer() {
         marginTop: 40,
       }}
     >
-      💚 <strong>Pix Automático</strong> — Projeto Beta Público © 2025 • Feito no Brasil 🇧🇷
+      💚 <strong>Pix Automático</strong> — Projeto Beta Público © 2025 • De brasileiro para brasileiros 🇧🇷
     </footer>
   );
 }
