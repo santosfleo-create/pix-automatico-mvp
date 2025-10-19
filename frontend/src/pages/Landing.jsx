@@ -210,7 +210,7 @@ export default function Landing() {
       }}
     />
     <img
-      src="/screenshots/Android Phone Client Status.png"
+      src="/screenshots/android-clientes.png"
       alt="Tela Android — lista de clientes"
       style={{
         width: "220px",
