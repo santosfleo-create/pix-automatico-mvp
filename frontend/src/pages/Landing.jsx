@@ -149,16 +149,7 @@ export default function Landing() {
             gap: "24px",
           }}
         >
-          <img
-            src="/screenshots/desktop-clients.png"
-            alt="Tela de clientes — versão desktop"
-            style={{
-              width: "420px",
-              borderRadius: "12px",
-              boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-            }}
-          />
-          <img
+            <img
             src="/screenshots/desktop-details.png"
             alt="Tela de autorizações — versão desktop"
             style={{
