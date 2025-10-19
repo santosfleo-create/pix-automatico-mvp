@@ -118,68 +118,117 @@ export default function Landing() {
       </section>
 
       {/* 💻 Demonstração do Sistema */}
-      <section
-        style={{
-          background: "#f7f8fa",
-          padding: "60px 16px",
-          textAlign: "center",
-          borderTop: "1px solid #e5e7eb",
-        }}
-      >
-        <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
-          💻 Simule cobranças de autorizações
-        </h3>
-        <p
-          style={{
-            color: "#4b5563",
-            maxWidth: "600px",
-            margin: "10px auto 40px auto",
-            fontSize: "16px",
-          }}
-        >
-          Interface simples e intuitiva — já em uso real na fase Beta pública.
-        </p>
-
-        {/* Galeria de screenshots */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "24px",
-          }}
-        >
-            <img
-  src="/screenshots/desktop-details.png"
-  alt="Tela de autorizações — versão desktop"
+<section
   style={{
-    maxWidth: "90%",
-    height: "auto",
-    borderRadius: "12px",
-    boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
-    objectFit: "contain",
+    background: "#f7f8fa",
+    padding: "60px 16px",
+    textAlign: "center",
+    borderTop: "1px solid #e5e7eb",
   }}
-/>
-          <img
-            src="/screenshots/android-simple.png"
-            alt="Tela do aplicativo Android"
-            style={{
-              width: "240px",
-              borderRadius: "20px",
-              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-            }}
-          />
-          <img
-            src="/screenshots/iphone-simple.png"
-            alt="Tela do aplicativo iPhone"
-            style={{
-              width: "240px",
-              borderRadius: "26px",
-              boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-            }}
-          />
-        </div>
-      </section>
+>
+  <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
+    ⚙️ Veja o Pix Automático em ação
+  </h3>
+  <p
+    style={{
+      color: "#4b5563",
+      maxWidth: "600px",
+      margin: "10px auto 40px auto",
+      fontSize: "16px",
+    }}
+  >
+    Interface responsiva — totalmente compatível com computadores e celulares.
+  </p>
+
+  {/* 💻 VERSÃO DESKTOP */}
+  <h4
+    style={{
+      color: "#166534",
+      fontSize: "20px",
+      fontWeight: 600,
+      marginBottom: "20px",
+      marginTop: "20px",
+    }}
+  >
+    💻 Versão Desktop
+  </h4>
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      marginBottom: "60px",
+    }}
+  >
+    <img
+      src="/screenshots/desktop-details.png"
+      alt="Tela de autorizações — versão desktop"
+      style={{
+        maxWidth: "80%",
+        height: "auto",
+        borderRadius: "12px",
+        boxShadow: "0 4px 10px rgba(0,0,0,0.15)",
+        objectFit: "contain",
+      }}
+    />
+  </div>
+
+  {/* 📱 VERSÃO MOBILE */}
+  <h4
+    style={{
+      color: "#166534",
+      fontSize: "20px",
+      fontWeight: 600,
+      marginBottom: "20px",
+    }}
+  >
+    📱 Versão Mobile
+  </h4>
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: "24px",
+    }}
+  >
+    <img
+      src="/screenshots/android-simple.png"
+      alt="Tela Android — autorizações"
+      style={{
+        width: "220px",
+        borderRadius: "24px",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+      }}
+    />
+    <img
+      src="/screenshots/iphone-simple.png"
+      alt="Tela iPhone — clientes"
+      style={{
+        width: "220px",
+        borderRadius: "24px",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+      }}
+    />
+    <img
+      src="/screenshots/android-clientes.png"
+      alt="Tela Android — lista de clientes"
+      style={{
+        width: "220px",
+        borderRadius: "24px",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+      }}
+    />
+    <img
+      src="/screenshots/android-reembolsar.png"
+      alt="Tela Android — tela de reembolso"
+      style={{
+        width: "220px",
+        borderRadius: "24px",
+        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
+      }}
+    />
+  </div>
+</section>
 
       {/* 💬 Seção de feedback */}
       <section
