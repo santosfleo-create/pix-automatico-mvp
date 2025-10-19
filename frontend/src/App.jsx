@@ -110,14 +110,30 @@ function FeedbackFab() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // 🔹 Função auxiliar para enviar o evento GA4
+  function trackFeedbackClick() {
+    if (window.gtag) {
+      window.gtag("event", "feedback_click", {
+        event_category: "CTA",
+        event_label: "Botão flutuante Feedback",
+        value: 1,
+      });
+      console.log("📊 GA4 event enviado: feedback_click");
+    } else {
+      console.warn("⚠️ gtag não encontrado — GA4 ainda não carregou.");
+    }
+  }
+
   function handleClick(e) {
     e.preventDefault();
+    trackFeedbackClick(); // envia o evento
+
     if (location.pathname === "/") {
-      // já na Landing → só rola
+      // já está na Landing → só faz scroll
       const el = document.getElementById("feedback");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-      // outra rota → navega para "/#feedback"; o ScrollToHash fará o resto
+      // outra rota → navega até /#feedback (ScrollToHash cuida do scroll)
       navigate("/#feedback");
     }
   }
