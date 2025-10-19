@@ -209,16 +209,7 @@ export default function Landing() {
         boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
       }}
     />
-    <img
-      src="/screenshots/android-details.png"
-      alt="Tela Android — lista de clientes"
-      style={{
-        width: "220px",
-        borderRadius: "24px",
-        boxShadow: "0 6px 16px rgba(0,0,0,0.2)",
-      }}
-    />
-    <img
+      <img
       src="/screenshots/android-reembolsar.png"
       alt="Tela Android — tela de reembolso"
       style={{
