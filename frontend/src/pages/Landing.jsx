@@ -230,6 +230,53 @@ export default function Landing() {
   </div>
 </section>
 
+      {/* 🔁 Segundo CTA */}
+<section
+  style={{
+    background: "#f7f8fa",
+    padding: "50px 16px",
+    textAlign: "center",
+    borderTop: "1px solid #e5e7eb",
+  }}
+>
+  <h3
+    style={{
+      color: "#166534",
+      fontSize: "22px",
+      fontWeight: 600,
+      marginBottom: "12px",
+    }}
+  >
+    Pronto para testar o Pix Automático?
+  </h3>
+  <p
+    style={{
+      color: "#4b5563",
+      fontSize: "16px",
+      marginBottom: "24px",
+    }}
+  >
+    Leva menos de 1 minuto para criar sua primeira autorização e simular uma cobrança via Pix.
+  </p>
+  <a
+    href="/clients"
+    style={{
+      display: "inline-block",
+      background: "#38b49c",
+      color: "#fff",
+      padding: "12px 28px",
+      borderRadius: 12,
+      textDecoration: "none",
+      fontSize: 18,
+      fontWeight: 600,
+      boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+      transition: "background 0.3s ease",
+    }}
+  >
+    🚀 Acessar o Sistema
+  </a>
+</section>
+
       {/* 💬 Seção de feedback */}
       <section
         id="feedback"
