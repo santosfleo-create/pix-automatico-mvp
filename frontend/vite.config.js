@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// 🔹 Configuração completa com Google Analytics injetado no build
 export default defineConfig({
   plugins: [react()],
   base: './',
@@ -12,6 +11,7 @@ export default defineConfig({
   server: {
     port: 5173,
   },
+});
   // 👇 Hook para injetar o Google Analytics automaticamente no <head>
   transformIndexHtml: {
     enforce: 'pre',
