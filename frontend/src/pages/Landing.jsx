@@ -127,7 +127,7 @@ export default function Landing() {
         }}
       >
         <h3 style={{ color: "#15803d", fontSize: "24px", fontWeight: 700 }}>
-          💻 Veja como funciona na prática
+          💻 Simule cobranças de autorizações
         </h3>
         <p
           style={{
