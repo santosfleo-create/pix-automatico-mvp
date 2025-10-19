@@ -150,7 +150,7 @@ export default function Landing() {
           }}
         >
             <img
-  src="/screenshots/desktop-details.png"
+  src="/screenshots/client-details.png"
   alt="Tela de autorizações — versão desktop"
   style={{
     maxWidth: "90%",
