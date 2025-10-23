@@ -54,7 +54,7 @@ function MvpBanner() {
         borderBottom: "1px solid #f2e8a0",
       }}
     >
-      ⚡ Versão pública de demonstração — O sistema está em fase de testes e alguns dados podem ser apagados.
+      ⚡ Versão pública de demonstração — Após adicionar o primeiro cliente, aguarde 15 segundos. O sistema está em fase de testes e alguns dados podem ser apagados.
     </div>
   );
 }
